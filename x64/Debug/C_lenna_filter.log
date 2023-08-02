@@ -1,4 +1,4 @@
 ﻿  C_lenna_filter.c
-D:\c_image\C_lenna_filter\C_lenna_filter.c(20,5): warning C4013: 'readDataFromFile'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-D:\c_image\C_lenna_filter\C_lenna_filter.c(240): warning C4716: 'convolution_2D': 값을 반환해야 합니다.
+D:\c_image\C_lenna_filter\C_lenna_filter.c(19,5): warning C4013: 'readDataFromFile'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+D:\c_image\C_lenna_filter\C_lenna_filter.c(258,13): warning C4098: 'save_2d_array_to_file': 'void' 함수에서 값을 반환하고 있습니다.
   C_lenna_filter.vcxproj -> D:\c_image\C_lenna_filter\x64\Debug\C_lenna_filter.exe
