@@ -15,7 +15,7 @@ int main() {
     int img_R[ROWS][COLS];
     int img_G[ROWS][COLS];
     int img_B[ROWS][COLS];
-    // ÀÌ¹ÌÁö RGB ºÒ·¯¿À±â
+    // ì´ë¯¸ì§€ RGB ë¶ˆëŸ¬ì˜¤ê¸°
     readDataFromFile("image_R.txt", img_R);
     readDataFromFile("image_G.txt", img_G);
     readDataFromFile("image_B.txt", img_B);
@@ -27,7 +27,7 @@ int main() {
     double output_B[ROWS][COLS] = { 0 };
 
  
-    // ÇÊÅÍ¸¶½ºÅ© LPF
+    // í•„í„°ë§ˆìŠ¤í¬ LPF
     double filtermask[ROWS_F][COLS_F] = { 0 };
     double size_f = ROWS_F * COLS_F;
     size_f = 1 / size_f;
@@ -37,7 +37,7 @@ int main() {
         }
     }
 
-    /*  LPF ¹è¿­ Ã¼Å©
+    /*  LPF ë°°ì—´ ì²´í¬
     for (int i = 0; i < ROWS_F; i++)
      {
          for (int j = 0; j < COLS_F; j++)
@@ -49,7 +49,7 @@ int main() {
 
 
 
-    //zero_padding_ÀÎÀÚ
+    //zero_padding_ì¸ì
     const int padding_row = (ROWS_F - 1) / 2;
     const int padding_col = (COLS_F - 1) / 2;
     const int padding_row_size = ROWS + (2 * padding_row);
@@ -58,7 +58,7 @@ int main() {
 
     int padding_row_length = padding_row_size - padding_row;
     int padding_col_length = padding_col_size - padding_col;
-    //zero padding ÀÎÀÚ È®ÀÎ
+    //zero padding ì¸ì í™•ì¸
     
     printf("padding_row : %d \n", padding_row);
     printf("padding_col : %d \n", padding_col);
@@ -103,7 +103,7 @@ int main() {
         }
     }
     
-    //Á¦·ÎÆĞµù Ãâ·ÂÈ®ÀÎ
+    //ì œë¡œíŒ¨ë”© ì¶œë ¥í™•ì¸
     /*
         for (int i = 0; i < padding_row_size; i++)
         {
@@ -114,7 +114,7 @@ int main() {
         }
       */  
 
-        //ÄÁº¼·ç¼Ç_R
+        //ì»¨ë³¼ë£¨ì…˜_R
         for (int i = 0; i < ROWS; i++)              // rows
         {
             for (int j = 0; j < COLS; j++)          // columns
@@ -126,13 +126,13 @@ int main() {
                         output_R[i][j] = output_R[i][j] + zero_padding_array_R[i + u][j + v] * filtermask[u][v];
                     }
                 }
-                //¹İ¿Ã¸²
+                //ë°˜ì˜¬ë¦¼
                 output_R[i][j] = (int)(output_R[i][j] + 0.5);
                 if (output_R[i][j] < 0) output_R[i][j] = 0;
                 if (output_R[i][j] > 255) output_R[i][j] = 255;
             }
         }
-        //ÄÁº¼·ç¼Ç_G
+        //ì»¨ë³¼ë£¨ì…˜_G
         for (int i = 0; i < ROWS; i++)              // rows
         {
             for (int j = 0; j < COLS; j++)          // columns
@@ -144,13 +144,13 @@ int main() {
                         output_G[i][j] = output_G[i][j] + zero_padding_array_G[i + u][j + v] * filtermask[u][v];
                     }
                 }
-                //¹İ¿Ã¸²
+                //ë°˜ì˜¬ë¦¼
                 output_G[i][j] = (int)(output_G[i][j] + 0.5);
                 if (output_G[i][j] < 0) output_G[i][j] = 0;
                 if (output_G[i][j] > 255) output_G[i][j] = 255;
             }
         }
-        //ÄÁº¼·ç¼Ç_B
+        //ì»¨ë³¼ë£¨ì…˜_B
         for (int i = 0; i < ROWS; i++)              // rows
         {
             for (int j = 0; j < COLS; j++)          // columns
@@ -162,7 +162,7 @@ int main() {
                         output_B[i][j] = output_B[i][j] + zero_padding_array_B[i + u][j + v] * filtermask[u][v];
                     }
                 }
-                //¹İ¿Ã¸²
+                //ë°˜ì˜¬ë¦¼
                 output_B[i][j] = (int)(output_B[i][j] + 0.5);
                 if (output_B[i][j] < 0) output_B[i][j] = 0;
                 if (output_B[i][j] > 255) output_B[i][j] = 255;
@@ -170,7 +170,7 @@ int main() {
         }
  
         
-        //output Ãâ·ÂÈ®ÀÎ
+        //output ì¶œë ¥í™•ì¸
       /*
         for (int i = 0; i < ROWS; i++)
         {
@@ -188,18 +188,18 @@ int main() {
 
 
 
-        //¸Ş¸ğ¸® ÇØÁ¦_R
+        //ë©”ëª¨ë¦¬ í•´ì œ_R
         for (int i = 0; i < padding_row_size; i++) {
             free(zero_padding_array_R[i]);
         }
         free(zero_padding_array_R);
         
-        //¸Ş¸ğ¸® ÇØÁ¦_G
+        //ë©”ëª¨ë¦¬ í•´ì œ_G
         for (int i = 0; i < padding_row_size; i++) {
             free(zero_padding_array_G[i]);
         }
         free(zero_padding_array_G);
-        //¸Ş¸ğ¸® ÇØÁ¦_B
+        //ë©”ëª¨ë¦¬ í•´ì œ_B
         for (int i = 0; i < padding_row_size; i++) {
             free(zero_padding_array_B[i]);
         }
@@ -213,37 +213,37 @@ int main() {
 
 
 
-// µ¥ÀÌÅÍ ºÒ·¯¿À±â
+// ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°
 int readDataFromFile(const char* filename, int arr[][COLS]) {
     FILE* file;
     fopen_s(&file, filename, "r");
     if (file == NULL) {
-        perror("ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.");
-        return 0; // ½ÇÆĞ ½Ã 0 ¹İÈ¯
+        perror("íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+        return 0; // ì‹¤íŒ¨ ì‹œ 0 ë°˜í™˜
     }
 
-    // ÆÄÀÏ¿¡¼­ µ¥ÀÌÅÍ¸¦ ÀĞ¾î 2Â÷¿ø ¹è¿­¿¡ ÀúÀåÇÕ´Ï´Ù.
+    // íŒŒì¼ì—ì„œ ë°ì´í„°ë¥¼ ì½ì–´ 2ì°¨ì› ë°°ì—´ì— ì €ì¥í•©ë‹ˆë‹¤.
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
             if (fscanf_s(file, "%d", &arr[i][j]) != 1) {
-                fprintf(stderr, "ÆÄÀÏ¿¡¼­ µ¥ÀÌÅÍ¸¦ ÀĞÀ» ¼ö ¾ø½À´Ï´Ù.");
+                fprintf(stderr, "íŒŒì¼ì—ì„œ ë°ì´í„°ë¥¼ ì½ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
                 fclose(file);
-                return 0; // ½ÇÆĞ ½Ã 0 ¹İÈ¯
+                return 0; // ì‹¤íŒ¨ ì‹œ 0 ë°˜í™˜
             }
         }
     }
 
-    // ÆÄÀÏÀ» ´İ½À´Ï´Ù.
+    // íŒŒì¼ì„ ë‹«ìŠµë‹ˆë‹¤.
     fclose(file);
 
-    return 1; // ¼º°ø ½Ã 1 ¹İÈ¯
+    return 1; // ì„±ê³µ ì‹œ 1 ë°˜í™˜
 }
-//µ¥ÀÌÅÍ ÀúÀå
+//ë°ì´í„° ì €ì¥
 void save_2d_array_to_file(const char* filename, double arr[][COLS]) {
     FILE* file;
     fopen_s(&file, filename, "w");
     if (file == NULL) {
-        printf("ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù.\n");
+        printf("íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
         return;
     }
     for (int i = 0; i < ROWS; i++) {
@@ -257,4 +257,3 @@ void save_2d_array_to_file(const char* filename, double arr[][COLS]) {
 
     return 1;
 }
-
