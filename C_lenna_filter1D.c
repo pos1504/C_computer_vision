@@ -112,7 +112,7 @@ int main() {
     double arr_G[48400] ={0};
     double arr_B[48400] ={0};
     
-    //txt읽어오기
+    
     readDataFromFile("image_R.txt",arr_R ,numRows , numCols );
     readDataFromFile("image_G.txt",arr_G ,numRows , numCols );
     readDataFromFile("image_B.txt",arr_B ,numRows , numCols );

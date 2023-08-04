@@ -7,7 +7,7 @@ int getIndex(int row, int col, int numCols) {
     return row * numCols + col;
 }
 // 2차원 zero padding을 수행하고 1차원 패딩된 배열을 반환하는 함수
-double* pad2DArray(double* arr2D, int numRows, int numCols, int paddingSize) {
+double* pad2DArray_zero(double* arr2D, int numRows, int numCols, int paddingSize) {
     // 패딩 처리된 배열의 행과 열 수 계산
     int paddedRows = numRows + 2 * paddingSize;
     int paddedCols = numCols + 2 * paddingSize;
@@ -35,6 +35,49 @@ double* pad2DArray(double* arr2D, int numRows, int numCols, int paddingSize) {
 
     return paddedArray;
 }
+
+double* pad2DArray_symmetric(double* arr2D, int numRows, int numCols, int paddingSize) {
+    // 대칭 패딩을 적용한 배열의 행과 열 개수 계산
+    int paddedRows = numRows + 2 * paddingSize;
+    int paddedCols = numCols + 2 * paddingSize;
+
+    // 대칭 패딩된 배열을 위한 메모리 할당
+    double* paddedArray = malloc(paddedRows * paddedCols * sizeof(double));
+    if (paddedArray == NULL) {
+        printf("메모리 할당에 실패했습니다.");
+        return NULL;
+    }
+
+    // 대칭 패딩으로 원래 배열의 원소들을 복사합니다.
+    for (int i = 0; i < paddedRows; i++) {
+        for (int j = 0; j < paddedCols; j++) {
+            int sourceRow = i - paddingSize;
+            int sourceCol = j - paddingSize;
+
+            // 행에 대한 대칭 패딩 처리
+            if (sourceRow < 0) {
+                sourceRow = -sourceRow - 1;
+            }
+            else if (sourceRow >= numRows) {
+                sourceRow = 2 * numRows - sourceRow - 1;
+            }
+
+            // 열에 대한 대칭 패딩 처리
+            if (sourceCol < 0) {
+                sourceCol = -sourceCol - 1;
+            }
+            else if (sourceCol >= numCols) {
+                sourceCol = 2 * numCols - sourceCol - 1;
+            }
+
+            // 원래 배열로부터 원소를 대칭 패딩된 배열로 복사합니다.
+            paddedArray[getIndex(i, j, paddedCols)] = arr2D[getIndex(sourceRow, sourceCol, numCols)];
+        }
+    }
+
+    return paddedArray;
+}
+
 // 필터를 적용하여 컨볼루션을 수행하는 함수
 void convolution(double* input, double* filter, double* output, int inputRows, int inputCols, int filterSize) {
     int outputRows = inputRows - filterSize + 1;
