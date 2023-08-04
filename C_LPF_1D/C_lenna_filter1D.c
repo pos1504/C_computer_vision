@@ -2,22 +2,22 @@
 #include <stdlib.h>
 #include "file_IO.h"
 #include "convolution.h"
-/* ¹è¿­ÀÇ Å©±â°¡ 1161764¹ÙÀÌÆ® »ç¿ë ½ºÅÃÀÇ Å©±â 1MB = 1000000¹ÙÀÌÆ® º¸´Ù Å©¹Ç·Î ¿À·ù°¡ ¹ß»ý 
-¸µÄ¿¿¡¼­ ½ºÅÃ¿¹¾à¸Þ¸ð¸®¸¦ ´Ã¸®°Å³ª
- ¹è¿­À» Àü¿ªÀ¸·Î ¼±¾ðÇØÁÖ¸éµÈ´Ù.    
+/* ï¿½è¿­ï¿½ï¿½ Å©ï¿½â°¡ 1161764ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ 1MB = 1000000ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ 
+ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Þ¸ð¸®¸ï¿½ ï¿½Ã¸ï¿½ï¿½Å³ï¿½
+ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½È´ï¿½.    
 */
 double arr_R[48400] = { 0 }; 
 double arr_G[48400] = { 0 };
 double arr_B[48400] = { 0 };
 
 int main() {
-    // ¿¹½Ã 2Â÷¿ø ¹è¿­
+    // ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­
     int numRows = 220;
     int numCols = 220;
 
     
     
-    //txtÀÐ¾î¿À±â
+    //txtï¿½Ð¾ï¿½ï¿½ï¿½ï¿½
     readDataFromFile("image_R.txt",arr_R ,numRows , numCols );
     readDataFromFile("image_G.txt",arr_G ,numRows , numCols );
     readDataFromFile("image_B.txt",arr_B ,numRows , numCols );
@@ -29,16 +29,16 @@ int main() {
       
      }
  
-    // ÆÐµù Å©±â
+    // ï¿½Ðµï¿½ Å©ï¿½ï¿½
     int paddingSize = 1;
     
-    // 2Â÷¿ø ¹è¿­À» 1Â÷¿ø ÆÐµùµÈ ¹è¿­·Î º¯È¯
+    // 2ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½Ðµï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½È¯
     double* paddedArray_R = pad2DArray((double*)arr_R,  numRows,  numCols,  paddingSize);
     double* paddedArray_G = pad2DArray((double*)arr_G,  numRows,  numCols,  paddingSize);
     double* paddedArray_B = pad2DArray((double*)arr_B,  numRows,  numCols,  paddingSize);
     // double* paddedArray = pad2DArray((double*)arr2D, numRows, numCols, paddingSize);
 
-    // ÆÐµù Ã³¸®µÈ ¹è¿­ Ãâ·Â
+    // ï¿½Ðµï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ ï¿½ï¿½ï¿½
     int paddedRows = numRows + 2 * paddingSize;
     int paddedCols = numCols + 2 * paddingSize;
  /*     for (int i = 0; i < paddedRows; i++) {
@@ -48,7 +48,7 @@ int main() {
         printf("\n");
     } */
  
-    // LPF(Àú¿ª Åë°ú ÇÊÅÍ) ÇÊÅÍ
+    // LPF(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½
     int filterSize = 3;
     double lpfFilter[3][3] = {
         {1.0 / 9.0, 1.0 / 9.0, 1.0 / 9.0},
@@ -56,33 +56,33 @@ int main() {
         {1.0 / 9.0, 1.0 / 9.0, 1.0 / 9.0}
     };
 
-    // ÄÁº¼·ç¼Ç °á°ú¸¦ ÀúÀåÇÒ ¹è¿­À» À§ÇÑ ¸Þ¸ð¸® ÇÒ´ç
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½Ò´ï¿½
     int outputRows = numRows;
     int outputCols = numCols;
     double* output_R = malloc(outputRows * outputCols * sizeof(double));
     if (output_R == NULL) {
-        printf("µ¿ÀûÇÒ´ç¿¡ ½ÇÆÐÇß½À´Ï´Ù.");
+        printf("ï¿½ï¿½ï¿½ï¿½ï¿½Ò´ç¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.");
         return -1;
     }
     double* output_G = malloc(outputRows * outputCols * sizeof(double));
     if (output_G == NULL) {
-        printf("µ¿ÀûÇÒ´ç¿¡ ½ÇÆÐÇß½À´Ï´Ù.");
+        printf("ï¿½ï¿½ï¿½ï¿½ï¿½Ò´ç¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.");
         return -1;
     }
 
     double* output_B = malloc(outputRows * outputCols * sizeof(double));
     if (output_B == NULL) {
-        printf("µ¿ÀûÇÒ´ç¿¡ ½ÇÆÐÇß½À´Ï´Ù.");
+        printf("ï¿½ï¿½ï¿½ï¿½ï¿½Ò´ç¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½.");
         return -1;
     }
 
-    // ÄÁº¼·ç¼Ç ¼öÇà
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     convolution(paddedArray_R, (double*)lpfFilter, output_R, paddedRows, paddedCols, filterSize);
-    convolution(paddedArray_R, (double*)lpfFilter, output_G, paddedRows, paddedCols, filterSize);
-    convolution(paddedArray_R, (double*)lpfFilter, output_B, paddedRows, paddedCols, filterSize);
+    convolution(paddedArray_G, (double*)lpfFilter, output_G, paddedRows, paddedCols, filterSize);
+    convolution(paddedArray_B, (double*)lpfFilter, output_B, paddedRows, paddedCols, filterSize);
 
-    // ÄÁº¼·ç¼Ç °á°ú Ãâ·Â
-     printf("ÄÁº¼·ç¼Ç °á°ú:\n");
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+     printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½:\n");
     for (int i = 0; i < outputRows; i++) {
         for (int j = 0; j < outputCols; j++) {
             printf("%lf ", output_R[getIndex(i, j, outputCols)]);
@@ -95,7 +95,7 @@ save_2d_array_to_file("output_G.txt",output_G,numRows,  numCols);
 save_2d_array_to_file("output_B.txt",output_B,numRows,  numCols);
 
 
-    // ÇÒ´çµÈ ¸Þ¸ð¸® ÇØÁ¦
+    // ï¿½Ò´ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½
     free(paddedArray_R);
     free(output_R);
     free(output_G);
