@@ -1,0 +1,2 @@
+D:\c_image\C_lenna_filter\x64\Debug\C_lenna_filter.exe
+D:\c_image\C_lenna_filter\C_LPF_2D\x64\Debug\C_lenna_filter.exe

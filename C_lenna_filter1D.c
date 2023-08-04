@@ -131,7 +131,6 @@ int main() {
     double* paddedArray_R = pad2DArray((double*)arr_R,  numRows,  numCols,  paddingSize);
     double* paddedArray_G = pad2DArray((double*)arr_G,  numRows,  numCols,  paddingSize);
     double* paddedArray_B = pad2DArray((double*)arr_B,  numRows,  numCols,  paddingSize);
-    // double* paddedArray = pad2DArray((double*)arr2D, numRows, numCols, paddingSize);
 
     // 패딩 처리된 배열 출력
     int paddedRows = numRows + 2 * paddingSize;
@@ -164,6 +163,7 @@ int main() {
     convolution(paddedArray_R, (double*)lpfFilter, output_B, paddedRows, paddedCols, filterSize);
 
     // 컨볼루션 결과 출력
+    /* 
      printf("컨볼루션 결과:\n");
     for (int i = 0; i < outputRows; i++) {
         for (int j = 0; j < outputCols; j++) {
@@ -171,7 +171,7 @@ int main() {
         }
         printf("\n");
     }
-
+ */
 save_2d_array_to_file("output_R.txt",output_R,numRows,  numCols);
 save_2d_array_to_file("output_G.txt",output_G,numRows,  numCols);
 save_2d_array_to_file("output_B.txt",output_B,numRows,  numCols);
